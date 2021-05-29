@@ -10,6 +10,9 @@ public class UserDAO {
     String address;
     boolean isVolunteer;
 
+    public UserDAO() {
+
+    }
 
     public UserDAO(int userID, String name, String photoUrl, int age, boolean gender, int credit, String address, boolean isVolunteer) {
         this.userID = userID;
@@ -54,7 +57,7 @@ public class UserDAO {
         this.age = age;
     }
 
-    public boolean isGender() {
+    public boolean isMale() {
         return gender;
     }
 
@@ -84,5 +87,12 @@ public class UserDAO {
 
     public void setUserID(int userID) {
         this.userID = userID;
+    }
+
+    @Override
+    public String toString() {
+        return userID + "," + name + "," + photoUrl +
+                "," + age + "," + gender + "," + credit +
+                "," + address + "," + isVolunteer;
     }
 }
