@@ -6,6 +6,29 @@ public class UserDAO {
     String photoUrl;
     int age;
     boolean gender;
+    int credit;
+    String address;
+    boolean isVolunteer;
+
+
+    public UserDAO(int userID, String name, String photoUrl, int age, boolean gender, int credit, String address, boolean isVolunteer) {
+        this.userID = userID;
+        this.name = name;
+        this.photoUrl = photoUrl;
+        this.age = age;
+        this.gender = gender;
+        this.credit = credit;
+        this.address = address;
+        this.isVolunteer = isVolunteer;
+    }
+
+    public int getCredit() {
+        return credit;
+    }
+
+    public void setCredit(int credit) {
+        this.credit = credit;
+    }
 
     public String getName() {
         return name;
@@ -54,9 +77,6 @@ public class UserDAO {
     public void setVolunteer(boolean volunteer) {
         isVolunteer = volunteer;
     }
-
-    String address;
-    boolean isVolunteer;
 
     public int getUserID() {
         return userID;

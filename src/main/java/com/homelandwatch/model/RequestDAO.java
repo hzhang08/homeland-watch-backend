@@ -20,6 +20,21 @@ public class RequestDAO {
     int requestId;
     String requestType;
     int elderlyId;
+
+    public RequestDAO(int requestId, String requestType, int elderlyId, int volunteerId, long requestStartTime, long requestEndTime, long startLocationLongtitude, long startLocationLatitude, long endLocationLongtitude, long endLocationLatitude, String reqeustStatus) {
+        this.requestId = requestId;
+        this.requestType = requestType;
+        this.elderlyId = elderlyId;
+        this.volunteerId = volunteerId;
+        this.requestStartTime = requestStartTime;
+        this.requestEndTime = requestEndTime;
+        this.startLocationLongtitude = startLocationLongtitude;
+        this.startLocationLatitude = startLocationLatitude;
+        this.endLocationLongtitude = endLocationLongtitude;
+        this.endLocationLatitude = endLocationLatitude;
+        this.reqeustStatus = reqeustStatus;
+    }
+
     int volunteerId;
     long requestStartTime;
     long requestEndTime;
