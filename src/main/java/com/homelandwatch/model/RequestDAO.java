@@ -20,8 +20,27 @@ public class RequestDAO {
     int requestId;
     String requestType;
     int elderlyId;
+    int volunteerId;
+    long requestStartTime;
+    long requestEndTime;
+    long startLocationLongtitude;
+    long startLocationLatitude;
+    long endLocationLongtitude;
+    long endLocationLatitude;
+    RequestStatus requestStatus;
 
-    public RequestDAO(int requestId, String requestType, int elderlyId, int volunteerId, long requestStartTime, long requestEndTime, long startLocationLongtitude, long startLocationLatitude, long endLocationLongtitude, long endLocationLatitude, String reqeustStatus) {
+    public enum RequestStatus {
+        Open,
+        Accepted,
+        InProgress,
+        Fulfilled
+    }
+
+
+    public RequestDAO(int requestId, String requestType, int elderlyId,
+                      int volunteerId, long requestStartTime, long requestEndTime,
+                      long startLocationLongtitude, long startLocationLatitude, long endLocationLongtitude,
+                      long endLocationLatitude, RequestStatus requestStatus) {
         this.requestId = requestId;
         this.requestType = requestType;
         this.elderlyId = elderlyId;
@@ -32,17 +51,9 @@ public class RequestDAO {
         this.startLocationLatitude = startLocationLatitude;
         this.endLocationLongtitude = endLocationLongtitude;
         this.endLocationLatitude = endLocationLatitude;
-        this.reqeustStatus = reqeustStatus;
+        this.requestStatus = requestStatus;
     }
 
-    int volunteerId;
-    long requestStartTime;
-    long requestEndTime;
-    long startLocationLongtitude;
-    long startLocationLatitude;
-    long endLocationLongtitude;
-    long endLocationLatitude;
-    String reqeustStatus;
 
     public int getRequestId() {
         return requestId;
@@ -124,12 +135,12 @@ public class RequestDAO {
         this.endLocationLatitude = endLocationLatitude;
     }
 
-    public String getReqeustStatus() {
-        return reqeustStatus;
+    public RequestStatus getRequestStatus() {
+        return requestStatus;
     }
 
-    public void setReqeustStatus(String reqeustStatus) {
-        this.reqeustStatus = reqeustStatus;
+    public void setRequestStatus(RequestStatus requestStatus) {
+        this.requestStatus = requestStatus;
     }
 
 
