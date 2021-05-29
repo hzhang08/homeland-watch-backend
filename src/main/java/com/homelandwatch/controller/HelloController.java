@@ -44,7 +44,8 @@ public class HelloController {
                                      @RequestParam Optional<Long> endLongitude, @RequestParam Optional<Long> endLatitude,
                                      @RequestParam Optional<Long> startTime, @RequestParam Optional<Long> endTime) {
 
-        return new UserDAO(42, "Wong", "http://example.com", 74, false, 32, "San Jose", false);
+        return new UserDAO(42, "Wong", "http://example.com", 74,
+                UserDAO.Gender.Female, 32, "San Jose", UserDAO.Role.Elderly);
 
     }
 
@@ -55,7 +56,10 @@ public class HelloController {
 
         List<RequestDAO> requestArr = new ArrayList<>();
 
-        requestArr.add(new RequestDAO(42, "Ride", 72, 123, 3213, 4325, 4325, 3243, 5432, 4563, "Open"));
+        requestArr.add(new RequestDAO(42, "Ride", 72, 123,
+                3213, 4325, 4325,
+                3243, 5432, 4563,
+                RequestDAO.RequestStatus.Open));
 
         return requestArr;
     }// return all open requests within 5 miles

@@ -5,16 +5,27 @@ public class UserDAO {
     String name;
     String photoUrl;
     int age;
-    boolean gender;
+    Gender gender;
     int credit;
     String address;
-    boolean isVolunteer;
+    Role role;
+
+    public enum Gender {
+        Male,
+        Female
+    }
+
+    public enum Role {
+        Volunteer,
+        Elderly
+    }
 
     public UserDAO() {
 
     }
 
-    public UserDAO(int userID, String name, String photoUrl, int age, boolean gender, int credit, String address, boolean isVolunteer) {
+    public UserDAO(int userID, String name, String photoUrl, int age, Gender gender,
+                   int credit, String address, Role role) {
         this.userID = userID;
         this.name = name;
         this.photoUrl = photoUrl;
@@ -22,7 +33,7 @@ public class UserDAO {
         this.gender = gender;
         this.credit = credit;
         this.address = address;
-        this.isVolunteer = isVolunteer;
+        this.role = role;
     }
 
     public int getCredit() {
@@ -57,11 +68,11 @@ public class UserDAO {
         this.age = age;
     }
 
-    public boolean isMale() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(boolean gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -73,12 +84,12 @@ public class UserDAO {
         this.address = address;
     }
 
-    public boolean isVolunteer() {
-        return isVolunteer;
+    public Role getRole() {
+        return role;
     }
 
-    public void setVolunteer(boolean volunteer) {
-        isVolunteer = volunteer;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public int getUserID() {
@@ -93,6 +104,6 @@ public class UserDAO {
     public String toString() {
         return userID + "," + name + "," + photoUrl +
                 "," + age + "," + gender + "," + credit +
-                "," + address + "," + isVolunteer;
+                "," + address + "," + role;
     }
 }
