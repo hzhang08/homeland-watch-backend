@@ -36,6 +36,9 @@ public class RequestDAO {
         Fulfilled
     }
 
+    public RequestDAO() {
+
+    }
 
     public RequestDAO(int requestId, String requestType, int elderlyId,
                       int volunteerId, long requestStartTime, long requestEndTime,

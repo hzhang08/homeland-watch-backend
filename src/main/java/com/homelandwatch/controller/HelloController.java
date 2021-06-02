@@ -2,10 +2,13 @@ package com.homelandwatch.controller;
 
 import com.homelandwatch.model.RequestDAO;
 import com.homelandwatch.model.UserDAO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,21 +41,67 @@ public class HelloController {
 
      */
 
+    @RequestMapping("/login")
+    public ResponseEntity login(@RequestParam Optional<String> username,
+                                @RequestParam Optional<String> password,
+                                HttpSession httpSession) {
+//        if (sqliteAccessor.getUserByName(username).getPassword() == password) {
+//            session.setAttribute("username", username); // username should be unique in this case
+//            return new ResponseEntity(HttpStatus.ACCEPTED);
+//        }
+
+        return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @RequestMapping("/logout")
+    public ResponseEntity logout(@RequestParam Optional<String> username,
+                                 HttpSession httpSession) {
+        if (!username.isPresent()) {
+            return new ResponseEntity(HttpStatus.NOT_MODIFIED);
+        }
+        httpSession.removeAttribute(username.get());
+        return new ResponseEntity(HttpStatus.ACCEPTED);
+    }
+
     @RequestMapping("/sendRequest")
-    public UserDAO sendRequest(@RequestParam Optional<String> service, @RequestParam Optional<Integer> userId,
+    public ResponseEntity<Integer> sendRequest(@RequestParam Optional<String> service, @RequestParam Optional<Integer> userId,
                                      @RequestParam Optional<Long> longtitude, @RequestParam Optional<Long> latitude,
                                      @RequestParam Optional<Long> endLongitude, @RequestParam Optional<Long> endLatitude,
                                      @RequestParam Optional<Long> startTime, @RequestParam Optional<Long> endTime) {
 
-        return new UserDAO(42, "Wong", "http://example.com", 74,
-                UserDAO.Gender.Female, 32, "San Jose", UserDAO.Role.Elderly);
+        // sqliteAccessor.insertRequest()
+        // return requestId;
+        return new ResponseEntity<Integer>(10, HttpStatus.ACCEPTED);
 
+    }
+
+    @RequestMapping("/getVolunteer")
+    public ResponseEntity<Integer> getVolunteer(@RequestParam Optional<Integer> requestId) {
+        // Request request = sqliteAccessor.getRequestById(requestId)
+        // if (request.getRequestStatus == Accepted) return request.getVolunteerId();
+        return new ResponseEntity<Integer>(20, HttpStatus.ACCEPTED);
+        // else return new ResponseEntity<Integer>(20, HttpStatus.PROCESSING);
+    }
+
+    @RequestMapping("/acceptRequest")
+    public ResponseEntity<Boolean> acceptRequest(@RequestParam Optional<Integer> userId,
+            @RequestParam Optional<Integer> requestId) {
+        // sqliteAccessor.updateRequestWithVolunteer(userId, requestId)
+        return new ResponseEntity<Boolean>(true, HttpStatus.ACCEPTED);
+    }
+
+    @RequestMapping("/requestFulfilled")
+    public ResponseEntity<Boolean> requestFulfilled(@RequestParam Optional<Integer> requestId) {
+        // sqliteAccessor.updateRequestStatus(requestId, requestStatus)
+        return new ResponseEntity<Boolean>(true, HttpStatus.ACCEPTED);
     }
 
     @RequestMapping("/getOpenRequests")
     List<RequestDAO> getOpenRequests(@RequestParam Optional<Integer> userId, @RequestParam Optional<Long> longtitude,
                                      @RequestParam Optional<Long> latitude, @RequestParam Optional<Long> startTime,
                                      @RequestParam Optional<Long> endTime) {
+
+        // return sqliteAccessor.getOpenRequest(startTime)
 
         List<RequestDAO> requestArr = new ArrayList<>();
 

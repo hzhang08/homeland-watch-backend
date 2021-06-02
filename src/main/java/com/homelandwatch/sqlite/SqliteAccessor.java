@@ -18,6 +18,16 @@ import java.util.List;
 import java.util.Random;
 
 public class SqliteAccessor {
+    private final String USER_ID = "ID";
+    private final String USER_NAME = "NAME";
+    private final String USER_PHONEURL = "PHONEURL";
+    private final String USER_AGE = "AGE";
+    private final String USER_GENDER = "GENDER";
+    private final String USER_CREDIT = "CREDIT";
+    private final String USER_ADDRESS = "ADDRESS";
+    private final String USER_ROLE = "ROLE";
+
+
     private String _sqliteUrl;
 
     private SqliteAccessor(String sqliteUrl) {
@@ -26,6 +36,7 @@ public class SqliteAccessor {
     }
 
     public static void main(String[] args) {
+        // used to verification and pre-generate data in db
         SqliteAccessor sqliteAccessor = new SqliteAccessor("jdbc:sqlite:src/main/resources/homeland_watch.db");
 
         // clean up
@@ -50,7 +61,7 @@ public class SqliteAccessor {
         }
 
         // TODO generate fake request
-        
+
     }
     private static List<UserDAO> generateUserFromPerson(List<Person> people,
                                                  UserDAO.Role role,
@@ -148,20 +159,20 @@ public class SqliteAccessor {
         return users;
     }
 
-    public UserDAO getUserById(int userId) {
+    public UserDAO getUserByName(String username) {
         UserDAO user = new UserDAO();
-        user.setUserID(userId);
+        user.setName(username);
 
         try (Connection conn = DriverManager.getConnection(_sqliteUrl)) {
 
-            String sql = "SELECT * from USER WHERE ID =" + userId;
+            String sql = "SELECT * from USER WHERE NAME =" + username;
             try(Statement statement = conn.createStatement();
                 ResultSet result = statement.executeQuery(sql)) {
 
                 if (result.isClosed()) {
                     return null;
                 }
-                user.setName(result.getString("NAME"));
+                user.setUserID(Integer.parseInt(result.getString("NAME")));
                 user.setPhotoUrl(result.getString("PHONEURL"));
                 user.setAge(Integer.parseInt(result.getString("AGE")));
                 user.setGender(UserDAO.Gender.Male.toString().equals(result.getString("GENDER")) ?
@@ -195,7 +206,6 @@ public class SqliteAccessor {
             for (UserDAO user: users) {
                 insertUserAndExecute(conn, user);
             }
-
         } catch (SQLException ex) {
             // log error
             System.out.println("inserUser error: " + ex);
@@ -260,11 +270,13 @@ public class SqliteAccessor {
                     "(ID INT PRIMARY KEY NOT NULL, " +
                     "TYPE CHAR(30) NOT NULL," +
                     "ELDERLY_ID INT NOT NULL," +
-                    "VOLUNTEER_ID INT NOT NULL," +
+                    "VOLUNTEER_ID INT," +
                     "START_TIME TIMESTAMP NOT NULL," +
                     "END_TIME TIMESTAMP NOT NULL," +
-                    "ORIGIN CHAR(300) NOT NULL," +
-                    "DESTINATION CHAR(300) NOT NULL," +
+                    "ORIGIN_LONG NUMBER(10, 8) NOT NULL," +
+                    "ORIGIN_LAT NUMBER(10, 8) NOT NULL " +
+                    "DESTINATION_LONG NUMBER(10, 8) NOT NULL," +
+                    "DESTINATION_LAT NUMBER(10, 8) NOT NULL" +
                     "STATUS CHAR(20) NOT NULL)";
             statement.executeUpdate(sql);
             statement.close();
@@ -274,9 +286,77 @@ public class SqliteAccessor {
         }
     }
 
-    public void insertRequest(List<RequestDAO> requests) {
+    public void insertRequest(RequestDAO request) {
+        try (Connection conn = DriverManager.getConnection(_sqliteUrl)) {
+            String sql = "INSERT INTO REQUEST (ID, TYPE, ELDERLY_ID, VOLUNTEER_ID," +
+                    " START_TIME, END_TIME, ORIGIN_LONG, ORIGIN_LAT," +
+                    " DESTINATION_LONG, DESTINATION_LAT, STATUS) " +
+                    "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+                int idx = 1;
+                preparedStatement.setInt(idx++, request.getRequestId());
+                preparedStatement.setString(idx++, request.getRequestType());
+                preparedStatement.setInt(idx++, request.getElderlyId());
+                preparedStatement.setInt(idx++, request.getVolunteerId());
+                preparedStatement.setLong(idx++, request.getRequestStartTime());
+                preparedStatement.setLong(idx++, request.getRequestEndTime());
+                preparedStatement.setDouble(idx++, request.getStartLocationLongtitude());
+                preparedStatement.setDouble(idx++, request.getStartLocationLatitude());
+                preparedStatement.setDouble(idx++, request.getEndLocationLongtitude());
+                preparedStatement.setDouble(idx++, request.getEndLocationLatitude());
+                preparedStatement.setString(idx, request.getRequestStatus().toString());
+
+                preparedStatement.executeUpdate();
+            } catch (SQLException ex) {
+                System.out.println("insert request error: " + ex);
+                ex.printStackTrace();
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public RequestDAO getRequestById(int requestId) {
+        RequestDAO request = new RequestDAO();
+        request.setRequestId(requestId);
+
+        try (Connection conn = DriverManager.getConnection(_sqliteUrl)) {
+
+            String sql = "SELECT * from REQUEST WHERE ID =" + requestId;
+            try(Statement statement = conn.createStatement();
+                ResultSet result = statement.executeQuery(sql)) {
+
+                if (result.isClosed()) {
+                    return null;
+                }
+                request.setElderlyId(result.getInt("ELDERLY_ID"));
+                if (RequestDAO.RequestStatus.valueOf(result.getString("STATUS"))
+                        != RequestDAO.RequestStatus.Open) {
+                    request.setVolunteerId(result.getInt("VOLUNTEER_ID"));
+                }
+                // set...
+
+            } catch (SQLException ex) {
+                System.out.println("getUser statement error: " + ex);
+            }
+        } catch (SQLException ex) {
+            // log error
+            System.out.println("getUser error: " + ex);
+        }
+        return request;
+    }
+
+    public void updateRequestWithVolunteer(int userId, int requestId) {
 
     }
 
+    public void updateRequestStatus(int requestId, RequestDAO.RequestStatus requestStatus) {
 
+    }
+
+    public List<RequestDAO> getOpenRequest(long startTime) {
+        List<RequestDAO> requestList = new ArrayList<>();
+        // getOpenRequest according to startTime
+        return requestList;
+    }
 }

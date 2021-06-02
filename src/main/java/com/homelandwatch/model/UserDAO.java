@@ -9,6 +9,7 @@ public class UserDAO {
     int credit;
     String address;
     Role role;
+    String password; // TODO encrypt password
 
     public enum Gender {
         Male,
