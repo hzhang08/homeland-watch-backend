@@ -3,6 +3,10 @@ package com.homelandwatch.app;
 import java.util.Arrays;
 
 import com.homelandwatch.controller.HelloController;
+import com.homelandwatch.controller.RequestController;
+import com.homelandwatch.service.RequestService;
+import com.homelandwatch.service.RequestServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,7 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackageClasses = HelloController.class)
+@ComponentScan(basePackages = {"com.homelandwatch"})
 public class MainApplication {
 
     public static void main(String[] args) {
