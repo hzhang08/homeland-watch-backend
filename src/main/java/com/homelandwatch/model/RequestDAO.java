@@ -32,22 +32,13 @@ public class RequestDAO {
     RequestStatus requestStatus;
 
     public enum RequestStatus {
-        Open("open"),
-        Accepted("accepted"),
-        InProgress("in_progress"),
-        Fulfilled("fulfilled");
+        Open("Open"),
+        Accepted("Accepted"),
+        InProgress("InProgress"),
+        Fulfilled("Fulfilled");
         private String label;
         RequestStatus(String label){
             this.label = label;
-        }
-        static RequestStatus valuesFromLabel(String label){
-            switch(label){
-                case ("open"): return RequestStatus.Open;
-                case("accepted"): return RequestStatus.Accepted;
-                case("in_progress"): return RequestStatus.InProgress;
-                case("fulfilled"): return RequestStatus.Fulfilled;
-            }
-            return null;
         }
     }
     public RequestDAO(){

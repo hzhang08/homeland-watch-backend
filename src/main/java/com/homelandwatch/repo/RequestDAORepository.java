@@ -14,4 +14,8 @@ public interface RequestDAORepository {
     void deleteById(long id);
 
     List<RequestDAO> listAllElderlyRequests(int elderlyId);
+
+    List<RequestDAO> listMyAcceptedRequets(int volunteerId);
+
+    void accept(int requestId, int volunteerId);
 }

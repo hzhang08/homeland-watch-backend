@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,19 +28,20 @@ public class RequestDAORepositoryImpl implements RequestDAORepository {
             requestDAO.setRequestStartTime(resultSet.getLong("start_time"));
             requestDAO.setRequestEndTime(resultSet.getLong("end_time"));
             requestDAO.setElderlyId(resultSet.getInt("elderly_id"));
+            requestDAO.setRequestStatus(RequestDAO.RequestStatus.valueOf(resultSet.getString("STATUS")));
             return requestDAO;
         }
     };
 
     @Override
     public List<RequestDAO> findAll() {
-        return jdbcTemplate.query("select * from REQUEST where STATUS= 'open'",rowMapper);
+        return jdbcTemplate.query("select * from REQUEST where STATUS='Open';",rowMapper);
     }
 
     @Override
     public void save(RequestDAO requestDAO) {
         jdbcTemplate.update(
-                "insert into REQUEST(TYPE,ELDERLY_ID,ELDERLY_NAME,STATUS) values( :requestType,:elderlyId,:elderlyName,:requestStatus)",
+                "insert into REQUEST(TYPE,ELDERLY_ID,ELDERLY_NAME,STATUS) values( :requestType,:elderlyId,:elderlyName,:requestStatus);",
                 new BeanPropertySqlParameterSource(requestDAO));
     }
 
@@ -59,5 +61,19 @@ public class RequestDAORepositoryImpl implements RequestDAORepository {
     public List<RequestDAO> listAllElderlyRequests(int elderlyId) {
         Map<String,Object> params = Collections.singletonMap("elderlyId",elderlyId);
         return jdbcTemplate.query("select * from REQUEST where ELDERLY_ID= :elderlyId",params,rowMapper);
+    }
+
+    @Override
+    public List<RequestDAO> listMyAcceptedRequets(int volunteerId) {
+        Map<String,Object> params = Collections.singletonMap("volunteerId",volunteerId);
+        return jdbcTemplate.query("select * from REQUEST where VOLUNTEER_ID= :volunteerId",params,rowMapper);
+    }
+
+    @Override
+    public void accept(int requestId, int volunteerId) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("requestId",requestId);
+        params.put("volunteerId",volunteerId);
+        jdbcTemplate.update("update REQUEST set VOLUNTEER_ID= :volunteerId,STATUS='Accepted' where id = :requestId",params);
     }
 }

@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.homelandwatch.app.Constants.DAVID_ID;
+import static com.homelandwatch.app.Constants.TIM_ID;
+
 @Controller
 public class RequestController {
 
@@ -27,12 +30,14 @@ public class RequestController {
     public String login(@RequestParam("username") String username,
                         Model model) {
         if("David".equalsIgnoreCase(username)){
-            List<RequestDAO> listRequests = requestService.listAllElderlyRequests(42);
+            List<RequestDAO> listRequests = requestService.listAllElderlyRequests(DAVID_ID);
             model.addAttribute("listRequests", listRequests);
             return "elderly_home";
         }else{
-            List<RequestDAO> listRequests = requestService.listAll();
-            model.addAttribute("listRequests", listRequests);
+            List<RequestDAO> openRequests = requestService.listAll();
+            List<RequestDAO> myAcceptedRequest = requestService.listMyAcceptedRequets(TIM_ID);
+            model.addAttribute("openRequests", openRequests);
+            model.addAttribute("myAcceptedRequest", myAcceptedRequest);
             return "volunteer_home";
         }
 
@@ -54,15 +59,14 @@ public class RequestController {
         requestDAO.setElderlyName("David");
         requestDAO.setRequestStatus(RequestDAO.RequestStatus.Open);
         requestService.save(requestDAO);
-        List<RequestDAO> listRequests = requestService.listAllElderlyRequests(42);
+        List<RequestDAO> listRequests = requestService.listAllElderlyRequests(DAVID_ID);
         model.addAttribute("listRequests", listRequests);
         return "elderly_home";
     }
 
-    @RequestMapping("/requests")
-    public String viewHomePage(Model model) {
-        List<RequestDAO> listRequests = requestService.listAll();
-        model.addAttribute("listRequests", listRequests);
+    @RequestMapping("/acceptRequest")
+    public String acceptRequest(@RequestParam("requestId") int requestId,Model model) {
+        requestService.accept(requestId,TIM_ID);
         return "view_request";
     }
 }
