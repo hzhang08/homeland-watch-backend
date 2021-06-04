@@ -54,6 +54,8 @@ public class RequestController {
         requestDAO.setElderlyName("David");
         requestDAO.setRequestStatus(RequestDAO.RequestStatus.Open);
         requestService.save(requestDAO);
+        List<RequestDAO> listRequests = requestService.listAllElderlyRequests(42);
+        model.addAttribute("listRequests", listRequests);
         return "elderly_home";
     }
 

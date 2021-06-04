@@ -57,7 +57,7 @@ public class RequestDAORepositoryImpl implements RequestDAORepository {
 
     @Override
     public List<RequestDAO> listAllElderlyRequests(int elderlyId) {
-        Map<String,Object> params = Collections.singletonMap("ELDERLY_ID",elderlyId);
-        return jdbcTemplate.query("select * from REQUEST where STATUS= 'open'",params,rowMapper);
+        Map<String,Object> params = Collections.singletonMap("elderlyId",elderlyId);
+        return jdbcTemplate.query("select * from REQUEST where ELDERLY_ID= :elderlyId",params,rowMapper);
     }
 }
