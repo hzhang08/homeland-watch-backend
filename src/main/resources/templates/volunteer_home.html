@@ -29,7 +29,7 @@
         </p>
     </div>
 
-    <div class="ml-4 mr-4 rounded-lg border-b-0 h-24 p-2 clearfix bg-gray-300" th:each="request : ${myAcceptedRequests}">
+    <div class="ml-4 mr-4 rounded-lg border-b-0 h-24 p-2 clearfix bg-gray-300" th:each="request : ${myAcceptedRequest}">
         <div class="rounded-full h-12 w-12 circle bg-gray-400 float-left">
             <img class="object-contain h-12 " src="img/elder_male1.png">
         </div>
@@ -59,6 +59,9 @@
             <div class="text-gray-400 ml-4 rounded-full h-6 w-15 circle bg-green float-right">
                 <span th:text="${request.elderlyName}"/></div>
         </div>
+        <div class="flex justify-center">
+            <div><a th:href="@{'/acceptRequest?requestId='+ ${request.requestId}}">Accept</a>
+            </div>
     </div>
 </div>
 

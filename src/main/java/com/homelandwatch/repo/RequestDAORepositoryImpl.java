@@ -60,7 +60,7 @@ public class RequestDAORepositoryImpl implements RequestDAORepository {
     @Override
     public List<RequestDAO> listAllElderlyRequests(int elderlyId) {
         Map<String,Object> params = Collections.singletonMap("elderlyId",elderlyId);
-        return jdbcTemplate.query("select * from REQUEST where ELDERLY_ID= :elderlyId limit 2",params,rowMapper);
+        return jdbcTemplate.query("select * from REQUEST where ELDERLY_ID= :elderlyId limit 5",params,rowMapper);
     }
 
     @Override
