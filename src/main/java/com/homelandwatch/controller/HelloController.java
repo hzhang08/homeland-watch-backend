@@ -56,7 +56,7 @@ public class HelloController {
 
         List<RequestDAO> requestArr = new ArrayList<>();
 
-        requestArr.add(new RequestDAO(42, "Ride", 72, 123,
+        requestArr.add(new RequestDAO(42, "Ride", 72,"David", 123,"Tim",
                 3213, 4325, 4325,
                 3243, 5432, 4563,
                 RequestDAO.RequestStatus.Open));

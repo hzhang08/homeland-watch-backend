@@ -20,7 +20,9 @@ public class RequestDAO {
     int requestId;
     String requestType;
     int elderlyId;
+    String elderlyName;
     int volunteerId;
+    String volunteerName;
     long requestStartTime;
     long requestEndTime;
     long startLocationLongtitude;
@@ -30,21 +32,38 @@ public class RequestDAO {
     RequestStatus requestStatus;
 
     public enum RequestStatus {
-        Open,
-        Accepted,
-        InProgress,
-        Fulfilled
+        Open("open"),
+        Accepted("accepted"),
+        InProgress("in_progress"),
+        Fulfilled("fulfilled");
+        private String label;
+        RequestStatus(String label){
+            this.label = label;
+        }
+        static RequestStatus valuesFromLabel(String label){
+            switch(label){
+                case ("open"): return RequestStatus.Open;
+                case("accepted"): return RequestStatus.Accepted;
+                case("in_progress"): return RequestStatus.InProgress;
+                case("fulfilled"): return RequestStatus.Fulfilled;
+            }
+            return null;
+        }
+    }
+    public RequestDAO(){
+
     }
 
-
-    public RequestDAO(int requestId, String requestType, int elderlyId,
-                      int volunteerId, long requestStartTime, long requestEndTime,
+    public RequestDAO(int requestId, String requestType, int elderlyId,String elderlyName,
+                      int volunteerId,String volunteerName, long requestStartTime, long requestEndTime,
                       long startLocationLongtitude, long startLocationLatitude, long endLocationLongtitude,
                       long endLocationLatitude, RequestStatus requestStatus) {
         this.requestId = requestId;
         this.requestType = requestType;
         this.elderlyId = elderlyId;
+        this.elderlyName = elderlyName;
         this.volunteerId = volunteerId;
+        this.volunteerName = volunteerName;
         this.requestStartTime = requestStartTime;
         this.requestEndTime = requestEndTime;
         this.startLocationLongtitude = startLocationLongtitude;
@@ -143,7 +162,19 @@ public class RequestDAO {
         this.requestStatus = requestStatus;
     }
 
+    public String getElderlyName() {
+        return elderlyName;
+    }
 
+    public void setElderlyName(String elderlyName) {
+        this.elderlyName = elderlyName;
+    }
 
+    public String getVolunteerName() {
+        return volunteerName;
+    }
 
+    public void setVolunteerName(String volunteerName) {
+        this.volunteerName = volunteerName;
+    }
 }

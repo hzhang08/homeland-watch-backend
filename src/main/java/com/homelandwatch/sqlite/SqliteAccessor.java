@@ -29,25 +29,25 @@ public class SqliteAccessor {
         SqliteAccessor sqliteAccessor = new SqliteAccessor("jdbc:sqlite:src/main/resources/homeland_watch.db");
 
         // clean up
-        sqliteAccessor.dropUserTable();
+//        sqliteAccessor.dropUserTable();
         sqliteAccessor.dropRequestTable();
 
         // init DB
-        sqliteAccessor.createUserTable();
+//        sqliteAccessor.createUserTable();
         sqliteAccessor.createRequestTable();
 
         // generate fake users
-        List<UserDAO> elderly = generateUserFromPerson(RandomPerson.get().listOf(20),
-                UserDAO.Role.Elderly, 0);
-        List<UserDAO> volunteers = generateUserFromPerson(RandomPerson.get().listOf(20),
-                UserDAO.Role.Volunteer, 20);
-        sqliteAccessor.insertUser(elderly);
-        sqliteAccessor.insertUser(volunteers);
-
-        List<UserDAO> users = sqliteAccessor.getAllUsers();
-        for (UserDAO user: users) {
-            System.out.println(user.toString());
-        }
+//        List<UserDAO> elderly = generateUserFromPerson(RandomPerson.get().listOf(20),
+//                UserDAO.Role.Elderly, 0);
+//        List<UserDAO> volunteers = generateUserFromPerson(RandomPerson.get().listOf(20),
+//                UserDAO.Role.Volunteer, 20);
+//        sqliteAccessor.insertUser(elderly);
+//        sqliteAccessor.insertUser(volunteers);
+//
+//        List<UserDAO> users = sqliteAccessor.getAllUsers();
+//        for (UserDAO user: users) {
+//            System.out.println(user.toString());
+//        }
 
         // TODO generate fake request
         
@@ -98,7 +98,7 @@ public class SqliteAccessor {
              */
             Statement statement = conn.createStatement();
             String sql = "CREATE TABLE USER " +
-                    "(ID INT PRIMARY KEY NOT NULL, " +
+                    "(ID INT PRIMARY KEY NOT NULL AUTOINCREMENT, " +
                     "NAME CHAR(20) NOT NULL, " +
                     "PHONEURL CHAR(500) NOT NULL," +
                     "AGE INT NOT NULL," +
@@ -203,12 +203,12 @@ public class SqliteAccessor {
     }
 
     private void insertUserAndExecute(Connection conn, UserDAO user) {
-        String sql = "INSERT INTO USER (ID, NAME, PHONEURL, AGE," +
+        String sql = "INSERT INTO USER ( NAME, PHONEURL, AGE," +
                 " GENDER, CREDIT, ADDRESS, ROLE) " +
-                "VALUES (?,?,?,?,?,?,?,?)";
+                "VALUES (?,?,?,?,?,?,?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             int idx = 1;
-            preparedStatement.setInt(idx++, user.getUserID());
+            //preparedStatement.setInt(idx++, user.getUserID());
             preparedStatement.setString(idx++, user.getName());
             preparedStatement.setString(idx++, user.getPhotoUrl());
             preparedStatement.setInt(idx++, user.getAge());
@@ -247,7 +247,9 @@ public class SqliteAccessor {
              *         request_id
              *         request_type(ride, shop,companion)
              *         elderly_id
+             *         elderly_name
              *         volunteer_id
+             *         volunteer_name
              *         request_start_time
              *         request_end_time
              *         request_start_location
@@ -257,15 +259,17 @@ public class SqliteAccessor {
              * */
             Statement statement = conn.createStatement();
             String sql = "CREATE TABLE REQUEST " +
-                    "(ID INT PRIMARY KEY NOT NULL, " +
+                    "(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "TYPE CHAR(30) NOT NULL," +
                     "ELDERLY_ID INT NOT NULL," +
-                    "VOLUNTEER_ID INT NOT NULL," +
-                    "START_TIME TIMESTAMP NOT NULL," +
-                    "END_TIME TIMESTAMP NOT NULL," +
-                    "ORIGIN CHAR(300) NOT NULL," +
-                    "DESTINATION CHAR(300) NOT NULL," +
-                    "STATUS CHAR(20) NOT NULL)";
+                    "ELDERLY_NAME INT NOT NULL," +
+                    "VOLUNTEER_ID INT ," +
+                    "VOLUNTEER_NAME INT ," +
+                    "START_TIME TIMESTAMP ," +
+                    "END_TIME TIMESTAMP ," +
+                    "ORIGIN VARCHAR(300)," +
+                    "DESTINATION VARCHAR(300)," +
+                    "STATUS VARCHAR(20) NOT NULL)";
             statement.executeUpdate(sql);
             statement.close();
         } catch (SQLException ex) {

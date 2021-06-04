@@ -1,0 +1,50 @@
+<!doctype html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <!-- ... -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link href="/tailwind.css" rel="stylesheet">
+</head>
+<body>
+<div class="space-y-6 mt-10">
+<form action="#" th:action="@{/login}" method="post">
+    <div class="bg-rose-300">
+        <img class="object-contain h-48 w-full" src="img/780.jpeg">
+    </div>
+    <div class="mb-3 pt-0">
+        <input id="User" type="text" name="username" placeholder="Username" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"/>
+    </div>
+
+    <div class="mb-3 pt-0">
+        <input type="password" placeholder="Password" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"/>
+    </div>
+    <div class="ml-4 h-64 grid grid-rows-1 grid-flow-col gap-4">
+        <div><button id="logInBtn" type="submit" class="h-12 px-12 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">Log In</button></div>
+        <div><button class="h-12 px-12 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">Sign Up</button></div>
+        <!-- <div><button class="h-12 px-6 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">Large</button></div> -->
+        <!-- <div><button class="h-12 px-6 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">Large</button></div>
+        <div><button class="h-12 px-6 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">Large</button></div>
+        <div><button class="h-12 px-6 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">Large</button></div>
+        <div><button class="h-12 px-6 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">Large</button></div>
+        <div><button class="h-12 px-6 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">Large</button></div>
+        <div><button class="h-12 px-6 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">Large</button></div> -->
+    </div>
+</form>
+</div>
+
+<script>
+
+        document.getElementById("logInBtn").onclick = function() {
+
+            var userVal = document.getElementById("User").value;
+            if (userVal == "vi") {
+                window.location.href = "send_request.html";
+            } else if(userVal == "vl") {
+                window.location.href = "view_request.html";
+            }
+
+        };
+    </script>
+</body>
+</html>
