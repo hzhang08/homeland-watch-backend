@@ -35,7 +35,7 @@ public class RequestDAORepositoryImpl implements RequestDAORepository {
 
     @Override
     public List<RequestDAO> findAll() {
-        return jdbcTemplate.query("select * from REQUEST where STATUS='Open';",rowMapper);
+        return jdbcTemplate.query("select * from REQUEST where STATUS='Open' limit 3;",rowMapper);
     }
 
     @Override
@@ -60,13 +60,13 @@ public class RequestDAORepositoryImpl implements RequestDAORepository {
     @Override
     public List<RequestDAO> listAllElderlyRequests(int elderlyId) {
         Map<String,Object> params = Collections.singletonMap("elderlyId",elderlyId);
-        return jdbcTemplate.query("select * from REQUEST where ELDERLY_ID= :elderlyId",params,rowMapper);
+        return jdbcTemplate.query("select * from REQUEST where ELDERLY_ID= :elderlyId limit 2",params,rowMapper);
     }
 
     @Override
     public List<RequestDAO> listMyAcceptedRequets(int volunteerId) {
         Map<String,Object> params = Collections.singletonMap("volunteerId",volunteerId);
-        return jdbcTemplate.query("select * from REQUEST where VOLUNTEER_ID= :volunteerId",params,rowMapper);
+        return jdbcTemplate.query("select * from REQUEST where VOLUNTEER_ID= :volunteerId limit 2",params,rowMapper);
     }
 
     @Override
