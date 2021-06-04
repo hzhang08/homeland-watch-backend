@@ -38,4 +38,14 @@ public class RequestServiceImpl implements RequestService {
     public List<RequestDAO> listAllElderlyRequests(int elderlyId) {
         return repo.listAllElderlyRequests(elderlyId);
     }
+
+    @Override
+    public List<RequestDAO> listMyAcceptedRequets(int volunteerId) {
+        return repo.listMyAcceptedRequets(volunteerId);
+    }
+
+    @Override
+    public void accept(int requestId, int volunteerId) {
+        repo.accept(requestId,volunteerId);
+    }
 }

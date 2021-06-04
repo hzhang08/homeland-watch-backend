@@ -1,5 +1,6 @@
 <!doctype html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- ... -->
     <meta charset="UTF-8" />
@@ -15,7 +16,7 @@
             <img id="avatar" class="object-contain h-12 " src="img/male.jpeg">
         </div>
         <div class="rounded-full h-6 w-12 circle bg-green float-left">
-            David
+            Tim
         </div>
         <div class="rounded-full h-12 w-12 circle bg-green float-right">
             <img class="object-contain h-12 " src="img/icon-menu-512.png">
@@ -24,61 +25,41 @@
 
     <div class="mt-4 border-b-0 rounded-tl-none rounded-tr-none p-0 h-6 clearfix text-center">
         <p class="mt-4 ml-4 text-left font-bold">
-
+            My accepted requests
         </p>
     </div>
 
-    <div class="ml-4 mr-4 rounded-lg border-b-0 h-24 p-2 clearfix bg-gray-300">
-        <div class="rounded-full h-12 w-12 circle bg-gray-400 float-left">
-            <img class="object-contain h-12 " src="img/elder_female.png">
-        </div>
-        <div class="ml-4 rounded-full h-6 circle bg-green float-left">
-            带我去大统华买辣椒
-        </div>
-
-        <div class="rounded-full h-6 w-full circle bg-green float-left">
-            <div class="text-gray-400 ml-4 rounded-full h-6 w-15 circle bg-green float-right">500 feet</div>
-            <div class="text-gray-400 ml-4 rounded-full h-6 w-15 circle bg-green float-right">30 mins</div>
-            <div class="text-gray-400 ml-4 rounded-full h-6 w-15 circle bg-green float-right">Now</div>
-        </div>
-    </div>
-
-    <div class="ml-4 mr-4 rounded-lg border-b-0 h-24 p-2 clearfix bg-gray-300">
-        <div class="rounded-full h-12 w-12 circle bg-gray-400 float-left">
-            <img class="object-contain h-12 " src="img/elder_male.png">
-        </div>
-        <div class="ml-4 rounded-full h-6 circle bg-green float-left">
-            可不可以开车带我去女儿家？
-        </div>
-
-        <div class="rounded-full h-6 w-full circle bg-green float-left">
-            <div class="text-gray-400 ml-4 rounded-full h-6 w-15 circle bg-green float-right">1 mile</div>
-            <div class="text-gray-400 ml-4 rounded-full h-6 w-15 circle bg-green float-right">40 mins</div>
-            <div class="text-red-600 ml-4 rounded-full h-6 w-15 circle bg-green float-right">Today</div>
-        </div>
-    </div>
-
-    <div class="mt-4 border-b-0 rounded-tl-none rounded-tr-none p-0 h-6 clearfix text-center">
-        <p class="mt-4 ml-4 text-left font-bold">
-            别人的请求
-        </p>
-    </div>
-
-    <div class="ml-4 mr-4 rounded-lg border-b-0 h-24 p-2 clearfix bg-gray-300">
+    <div class="ml-4 mr-4 rounded-lg border-b-0 h-24 p-2 clearfix bg-gray-300" th:each="request : ${myAcceptedRequests}">
         <div class="rounded-full h-12 w-12 circle bg-gray-400 float-left">
             <img class="object-contain h-12 " src="img/elder_male1.png">
         </div>
         <div class="ml-4 rounded-full h-6 circle bg-green float-left">
-            带我去社区公园
+            <span th:text="${request.requestType}"/>
         </div>
 
         <div class="rounded-full h-6 w-full circle bg-green float-left">
-            <div class="text-gray-400 ml-4 rounded-full h-6 w-15 circle bg-green float-right">500 feet</div>
-            <div class="text-gray-400 ml-4 rounded-full h-6 w-15 circle bg-green float-right">30 mins</div>
-            <div class="text-red-600 ml-4 rounded-full h-6 w-15 circle bg-green float-right">Today</div>
+            <div class="text-gray-400 ml-4 rounded-full h-6 w-15 circle bg-green float-right">
+                <span th:text="${request.elderlyName}"/></div>
         </div>
     </div>
+    <div class="mt-4 border-b-0 rounded-tl-none rounded-tr-none p-0 h-6 clearfix text-center">
+        <p class="mt-4 ml-4 text-left font-bold">
+            Open requests:
+        </p>
+    </div>
+    <div class="ml-4 mr-4 rounded-lg border-b-0 h-24 p-2 clearfix bg-gray-300" th:each="request : ${openRequests}">
+        <div class="rounded-full h-12 w-12 circle bg-gray-400 float-left">
+            <img class="object-contain h-12 " src="img/elder_male1.png">
+        </div>
+        <div class="ml-4 rounded-full h-6 circle bg-green float-left">
+            <span th:text="${request.requestType}"/>
+        </div>
 
+        <div class="rounded-full h-6 w-full circle bg-green float-left">
+            <div class="text-gray-400 ml-4 rounded-full h-6 w-15 circle bg-green float-right">
+                <span th:text="${request.elderlyName}"/></div>
+        </div>
+    </div>
 </div>
 
 <script>
