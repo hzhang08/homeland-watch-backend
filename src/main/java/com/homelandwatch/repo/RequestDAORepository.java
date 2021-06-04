@@ -12,4 +12,6 @@ public interface RequestDAORepository {
     RequestDAO findById(long id);
 
     void deleteById(long id);
+
+    List<RequestDAO> listAllElderlyRequests(int elderlyId);
 }

@@ -27,8 +27,9 @@ public class RequestController {
     public String login(@RequestParam("username") String username,
                         Model model) {
         if("David".equalsIgnoreCase(username)){
-            model.addAttribute("requestDAO", new RequestDAO());
-            return "send_request";
+            List<RequestDAO> listRequests = requestService.listAllElderlyRequests(42);
+            model.addAttribute("listRequests", listRequests);
+            return "elderly_home";
         }else{
             List<RequestDAO> listRequests = requestService.listAll();
             model.addAttribute("listRequests", listRequests);
@@ -41,7 +42,7 @@ public class RequestController {
     @GetMapping("/newRequest")
     public String newRequest(Model model) {
         model.addAttribute("requestDAO", new RequestDAO());
-        return "send_request";
+        return "request_details";
     }
 
     @PostMapping("/sendRequest")
@@ -53,7 +54,7 @@ public class RequestController {
         requestDAO.setElderlyName("David");
         requestDAO.setRequestStatus(RequestDAO.RequestStatus.Open);
         requestService.save(requestDAO);
-        return "request_details";
+        return "elderly_home";
     }
 
     @RequestMapping("/requests")

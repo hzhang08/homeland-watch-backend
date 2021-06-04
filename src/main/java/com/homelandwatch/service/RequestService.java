@@ -12,4 +12,6 @@ public interface RequestService {
     RequestDAO get(long id);
 
     void delete(long id);
+
+    List<RequestDAO> listAllElderlyRequests(int elderlyId);
 }

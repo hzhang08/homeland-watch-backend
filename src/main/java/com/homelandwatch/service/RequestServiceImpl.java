@@ -33,4 +33,9 @@ public class RequestServiceImpl implements RequestService {
     public void delete(long id) {
         repo.deleteById(id);
     }
+
+    @Override
+    public List<RequestDAO> listAllElderlyRequests(int elderlyId) {
+        return repo.listAllElderlyRequests(elderlyId);
+    }
 }

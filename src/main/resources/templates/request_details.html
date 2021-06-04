@@ -1,97 +1,111 @@
 <!doctype html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
 <head>
   <!-- ... -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <link href="/tailwind.css" rel="stylesheet">
+  
 </head>
 <body>
-
     <div class="space-y-4">
 
         <div class="border-b-0 rounded-tl-none rounded-tr-none h-6 p-2 clearfix">
             <div class="rounded-full h-6 w-12 circle bg-green float-left">
                 <img id="back" class="object-contain h-12 " src="img/arrow-back.png">
             </div>
-            <div class="rounded-full h-6 w-12 circle bg-green float-left">
-                返回
-            </div>
-        </div>
-    
-        <div class="border-b-0 rounded-tl-none rounded-tr-none p-0 h-6 clearfix text-center">
-            <p class="text-center font-bold">
-                需求详情 1/2
-            </p>
-        </div>
-
-        <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
-            <div class="rounded-full h-12 w-12 circle bg-green float-left">
-                <img class="object-contain h-12 " src="img/compass.png">
-            </div>
-            <div class="rounded-full h-12 w-12 circle bg-green float-left">
-                在哪见
+            <div class="rounded-full h-6 circle bg-green float-left">
+                Go back
             </div>
         </div>
 
-        <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
-            <div class="rounded-full h-12 circle bg-green float-left">
-                <input type="text" class="border-8 w-80"/>
+        <form action="#" th:action="@{/sendRequest}" th:object="${requestDAO}" method="post">
+            <div class="border-b-0 rounded-tl-none rounded-tr-none p-0 h-6 clearfix text-center">
+                <p class="text-center font-bold">
+                    Request Details
+                </p>
             </div>
-            <div class="rounded-full h-12 w-12 circle bg-green float-right">
-                <img class="object-contain h-12 " src="img/pen.png">
-            </div>
-        </div>
 
-        <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
-            <div class="rounded-full h-12 w-12 circle bg-green float-left">
-                <img class="object-contain h-12 " src="img/calendar.png">
+            <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
+                <div class="rounded-full h-12 w-12 circle bg-green float-left">
+                    <img class="object-contain h-12 " src="img/compass.png">
+                </div>
+                <div class="rounded-full h-12 circle bg-green float-left font-bold">
+                    What can i help with？
+                </div>
             </div>
-            <div class="rounded-full h-12 circle bg-green float-left">
-                什么时候
-            </div>
-        </div>
 
-        <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
-            <div class="rounded-full h-12 circle bg-green float-left">
-                <input type="text" class="border-8 w-80"/>
+            <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
+                <div class="rounded-full h-12 circle bg-green float-left">
+                    <input type="text" class="border-8 w-80" th:field="*{requestType}"/>
+                </div>
+                <div class="rounded-full h-12 w-12 circle bg-green float-right">
+                    <img class="object-contain h-12 " src="img/pen.png">
+                </div>
             </div>
-            <div class="rounded-full h-12 w-12 circle bg-green float-right">
-                <img class="object-contain h-12 " src="img/pen.png">
-            </div>
-        </div>
-        
-        <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
-            <div class="rounded-full h-12 w-12 circle bg-green float-left">
-                <img class="object-contain h-12 " src="img/clock.png">
-            </div>
-            <div class="rounded-full h-12 circle bg-green float-left">
-                预计时长
-            </div>
-        </div>
 
-        <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
-            <div class="rounded-full h-12 circle bg-green float-left">
-                <input type="text" class="border-8 w-80"/>
+            <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
+                <div class="rounded-full h-12 w-12 circle bg-green float-left">
+                    <img class="object-contain h-12 " src="img/compass.png">
+                </div>
+                <div class="rounded-full h-12 circle bg-green float-left font-bold">
+                    Where to
+                </div>
             </div>
-            <div class="rounded-full h-12 w-12 circle bg-green float-right">
-                <img class="object-contain h-12 " src="img/pen.png">
+
+            <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
+                <div class="rounded-full h-12 circle bg-green float-left">
+                    <input type="text" class="border-8 w-80"/>
+                </div>
+                <div class="rounded-full h-12 w-12 circle bg-green float-right">
+                    <img class="object-contain h-12 " src="img/pen.png">
+                </div>
             </div>
-        </div>
 
-        <div class="flex justify-center">
-            <div><button class="h-12 px-12 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800 mt-10">确认</button></div>
-        </div>
+            <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
+                <div class="rounded-full h-12 w-12 circle bg-green float-left">
+                    <img class="object-contain h-12 " src="img/calendar.png">
+                </div>
+                <div class="rounded-full h-12 circle bg-green float-left font-bold">
+                    Dates
+                </div>
+            </div>
 
+            <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
+                <div class="rounded-full h-12 circle bg-green float-left">
+                    <input type="date" value="2021-06-04" min="2021-06-03" max="2021-06-10" class="border-8 w-80"/>
+                </div>
+                <div class="rounded-full h-12 w-12 circle bg-green float-right">
+                    <img class="object-contain h-12 " src="img/pen.png">
+                </div>
+            </div>
+
+            <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
+                <div class="rounded-full h-12 w-12 circle bg-green float-left">
+                    <img class="object-contain h-12 " src="img/clock.png">
+                </div>
+                <div class="rounded-full h-12 circle bg-green float-left font-bold">
+                    Duration
+                </div>
+            </div>
+
+            <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
+                <div class="rounded-full h-12 circle bg-green float-left">
+                    <input class="border-8 w-80 html-duration-picker"/>
+                </div>
+                <div class="rounded-full h-12 w-12 circle bg-green float-right">
+                    <img class="object-contain h-12 " src="img/pen.png">
+                </div>
+            </div>
+
+            <div class="ml-4 h-64 grid grid-rows-1 grid-flow-col gap-4">
+                <div><button id="logInBtn" type="submit" class="h-12 px-12 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">Confirm</button></div>
+                <div><button class="h-12 px-12 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">Reset</button></div>
+            </div>
+        </form>
     </div>
-    
-    <script>
-    
-        document.getElementById("back").onclick = function() { 
 
-                window.location.href = "send_request.html"; 
-        
-        };
-    </script>
+<script src="js/html-duration-picker.min.js"></script>
 </body>
 </html>

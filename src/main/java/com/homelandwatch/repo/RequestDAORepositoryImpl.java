@@ -54,4 +54,10 @@ public class RequestDAORepositoryImpl implements RequestDAORepository {
         Map<String,Object> params = Collections.singletonMap("requestId",id);
         jdbcTemplate.update("delete from REQUEST where id = :requestId",params);
     }
+
+    @Override
+    public List<RequestDAO> listAllElderlyRequests(int elderlyId) {
+        Map<String,Object> params = Collections.singletonMap("ELDERLY_ID",elderlyId);
+        return jdbcTemplate.query("select * from REQUEST where STATUS= 'open'",params,rowMapper);
+    }
 }
