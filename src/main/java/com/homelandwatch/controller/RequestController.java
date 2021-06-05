@@ -67,6 +67,10 @@ public class RequestController {
     @RequestMapping("/acceptRequest")
     public String acceptRequest(@RequestParam("requestId") int requestId,Model model) {
         requestService.accept(requestId,TIM_ID);
-        return "view_request";
+        List<RequestDAO> openRequests = requestService.listAll();
+        List<RequestDAO> myAcceptedRequest = requestService.listMyAcceptedRequets(TIM_ID);
+        model.addAttribute("openRequests", openRequests);
+        model.addAttribute("myAcceptedRequest", myAcceptedRequest);
+        return "volunteer_home";
     }
 }

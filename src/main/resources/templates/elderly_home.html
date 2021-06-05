@@ -6,39 +6,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <link href="/tailwind.css" rel="stylesheet">
+    <link href="/hamburger_menu.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
 <div class="space-y-8">
     <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
-        <div class="rounded-full h-12 w-12 circle bg-green float-left">
-            <img id="avatar" class="object-contain h-12 " src="img/elder_male1.png">
-        </div>
-        <div class="ml-4 rounded-full h-6 circle bg-green float-left">
-            David Kuan
-        </div>
-        <div class="rounded-full h-12 w-12 circle bg-green float-right">
-            <img class="object-contain h-12 " src="img/icon-menu-512.png">
+        <div class="topnav">
+            <div class="rounded-full h-12 w-12 circle bg-green float-left">
+                <img id="avatar" class="object-contain h-12 " src="img/elder_male1.png">
+            </div>
+
+            <div class="ml-4 rounded-full h-6 circle bg-green float-left">
+                David Kuan
+            </div>
+            <!-- Navigation links (hidden by default) -->
+            <a href="#home" class="active"></a>
+            <div class="w-32 float-right" id="myLinks">
+                <a href="/newRequest">Create Request</a>
+                <a href="#profile">Profile</a>
+                <a href="#logout">Logout</a>
+            </div>
+            <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
         </div>
     </div>
-    <table>
-        <tr>
-            <td align="left" width="40%">
-                <div class="mt-4 border-b-0 rounded-tl-none rounded-tr-none p-0 h-6 clearfix text-center">
-                    <p class="mt-4 ml-4 text-left font-bold">
-                        My Requests
-                    </p>
-                </div>
-            </td>
-            <td width="30%"></td>
-            <td align="right" width="30%">
-                <div class="flex justify-center">
-                    <div><button onclick="window.location.href='/newRequest'" class="h-8 px-8 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800 mt-10">+</button></div>
-                </div>
-            </td>
-        </tr>
-    </table>
 
+    <div class="mt-4 border-b-0 rounded-tl-none rounded-tr-none p-0 h-6 clearfix text-center">
+        <p class="mt-4 ml-4 text-left font-bold">
+            My Requests
+        </p>
+    </div>
 
         <div th:each="request : ${listRequests}">
             <div class="ml-4 mr-4 rounded-lg border-b-0 h-24 p-2 clearfix bg-gray-300">
@@ -65,6 +66,14 @@
 </div>
 
 <script>
+        function myFunction() {
+          var x = document.getElementById("myLinks");
+          if (x.style.display === "block") {
+            x.style.display = "none";
+          } else {
+            x.style.display = "block";
+          }
+        }
 
         document.getElementById("back").onclick = function() {
 
