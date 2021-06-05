@@ -42,21 +42,21 @@
     </div>
 
         <div th:each="request : ${listRequests}">
-            <div class="ml-4 mr-4 rounded-lg border-b-0 h-24 p-2 clearfix bg-gray-300">
+            <div class="ml-4 mr-4 rounded-lg border-b-0 h-28 p-2 clearfix bg-gray-300">
                 <div class="rounded-full h-12 w-12 circle bg-gray-400 float-left">
                     <img class="object-contain h-12 " src="img/elder_male1.png">
                 </div>
-                <div class="ml-4 rounded-full h-6 circle bg-green float-left">
+                <div class="rounded-full h-6 circle bg-green float-left">
                     <td th:text="${request.requestType}"></td>
                 </div>
 
                 <div class="rounded-full h-6 w-full circle bg-green float-left">
-                    <div class="text-gray-400 ml-4 rounded-full h-6 w-15 circle bg-green float-right">
+                    <div class="text-gray-400 rounded-full h-6 circle bg-green float-right">
                         <td th:text="${request.volunteerName}"></td>
                     </div>
                 </div>
                 <div class="rounded-full h-6 w-full circle bg-green float-left">
-                    <div class="text-gray-400 ml-4 rounded-full h-6 w-15 circle bg-green float-right">
+                    <div class="text-gray-400 rounded-full h-6 circle bg-green float-right">
                         <td th:text="${request.requestStatus}"></td>
                     </div>
                 </div>

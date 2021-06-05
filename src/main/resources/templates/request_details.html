@@ -11,7 +11,7 @@ xmlns:th="http://www.thymeleaf.org">
 <body>
     <div class="space-y-4">
 
-        <div class="border-b-0 rounded-tl-none rounded-tr-none h-6 p-2 clearfix">
+        <div class="border-b-0 rounded-tl-none rounded-tr-none h-16 p-2 clearfix">
             <div class="rounded-full h-6 w-12 circle bg-green float-left">
                 <img id="back" class="object-contain h-12 " src="img/arrow-back.png">
             </div>
@@ -20,7 +20,7 @@ xmlns:th="http://www.thymeleaf.org">
             </div>
         </div>
 
-        <form action="#" th:action="@{/sendRequest}" th:object="${requestDAO}" method="post">
+        <form class="space-y-4" action="#" th:action="@{/sendRequest}" th:object="${requestDAO}" method="post">
             <div class="border-b-0 rounded-tl-none rounded-tr-none p-0 h-6 clearfix text-center">
                 <p class="text-center font-bold">
                     Request Details
@@ -36,14 +36,15 @@ xmlns:th="http://www.thymeleaf.org">
                 </div>
             </div>
 
-            <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
+            <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-1 clearfix">
                 <div class="rounded-full h-12 circle bg-green float-left">
                     <input type="text" class="border-8 w-80" th:field="*{requestType}"/>
                 </div>
-                <div class="rounded-full h-12 w-12 circle bg-green float-right">
+                <div class="rounded-full h-8 w-8 circle bg-green float-right">
                     <img class="object-contain h-12 " src="img/pen.png">
                 </div>
             </div>
+
 
             <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
                 <div class="rounded-full h-12 w-12 circle bg-green float-left">
@@ -54,11 +55,11 @@ xmlns:th="http://www.thymeleaf.org">
                 </div>
             </div>
 
-            <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
+            <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-1 clearfix">
                 <div class="rounded-full h-12 circle bg-green float-left">
                     <input type="text" class="border-8 w-80"/>
                 </div>
-                <div class="rounded-full h-12 w-12 circle bg-green float-right">
+                <div class="rounded-full h-8 w-8 circle bg-green float-right">
                     <img class="object-contain h-12 " src="img/pen.png">
                 </div>
             </div>
@@ -72,36 +73,18 @@ xmlns:th="http://www.thymeleaf.org">
                 </div>
             </div>
 
-            <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
+            <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-1 clearfix">
                 <div class="rounded-full h-12 circle bg-green float-left">
-                    <input type="date" value="2021-06-04" min="2021-06-03" max="2021-06-10" class="border-8 w-80"/>
+                    <input type="datetime-local" value="2021-06-04T19:30" min="2021-06-03T00:00" max="2021-06-10T00:00" class="border-8 w-80"/>
                 </div>
-                <div class="rounded-full h-12 w-12 circle bg-green float-right">
+                <div class="rounded-full h-8 w-8 circle bg-green float-right">
                     <img class="object-contain h-12 " src="img/pen.png">
                 </div>
             </div>
 
-            <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
-                <div class="rounded-full h-12 w-12 circle bg-green float-left">
-                    <img class="object-contain h-12 " src="img/clock.png">
-                </div>
-                <div class="rounded-full h-12 circle bg-green float-left font-bold">
-                    Duration
-                </div>
-            </div>
-
-            <div class="border-b-0 rounded-tl-none rounded-tr-none h-12 p-2 clearfix">
-                <div class="rounded-full h-12 circle bg-green float-left">
-                    <input class="border-8 w-80 html-duration-picker"/>
-                </div>
-                <div class="rounded-full h-12 w-12 circle bg-green float-right">
-                    <img class="object-contain h-12 " src="img/pen.png">
-                </div>
-            </div>
-
-            <div class="ml-4 h-64 grid grid-rows-1 grid-flow-col gap-4">
-                <div><button id="logInBtn" type="submit" class="h-12 px-12 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">Confirm</button></div>
-                <div><button class="h-12 px-12 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">Reset</button></div>
+            <div class="h-64">
+                <div><button id="logInBtn" type="submit" class="h-12 px-12 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800 float-left">Confirm</button></div>
+                <div><button class="h-12 px-12 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800 float-right">Reset</button></div>
             </div>
         </form>
     </div>
